@@ -1,2 +1,2 @@
 # sokoban
-test
+test2
