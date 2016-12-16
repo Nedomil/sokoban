@@ -25,7 +25,7 @@ public class ButtonManager : MonoBehaviour {
 	void Update() {
 		showOrHideLandButton ();
 
-		if (Input.GetKey (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
 			showOrHideMainMenu ();
 		}
 	}
