@@ -10,10 +10,10 @@ using System.Collections;
  * - Leitet die Wichtigen Objekte weiter (Board, Player usw.)
  */
 public class Driver : MonoBehaviour {
-
 	private ArrayList sokobans;
 	private Player player;
 	private bool inSpace;
+	private ButtonManager buttonManager;
 
 	private Sokoban activeSokoban;
 
@@ -24,6 +24,7 @@ public class Driver : MonoBehaviour {
 		connectSpacePlayer ();
 		activeSokoban = (Sokoban) sokobans [0];
 		inSpace = false;
+		buttonManager = FindObjectOfType<ButtonManager> ();
 	}
 
 	private void setUpSokobans() {
@@ -38,10 +39,14 @@ public class Driver : MonoBehaviour {
 	}
 
 	private void setUpSokoban(Vector3 placeInWorld, string levelPath, bool newPlayer, Vector3 camPosition, Vector3 camForward) {
-		Sokoban sokoban = new Sokoban (placeInWorld, levelPath, newPlayer);
+		Sokoban sokoban = new Sokoban (placeInWorld, levelPath, newPlayer, this);
 		sokoban.setMainCamStartPosition(camPosition);
 		sokoban.setMainCamStartForward(camForward);
 		sokobans.Add (sokoban);
+	}
+
+	public bool gamePaused() {
+		return buttonManager.getMainMenuOn ();
 	}
 
 	private void setSamePlayerInSokobans() {

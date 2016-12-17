@@ -40,7 +40,7 @@ public class SpacePlayer : MonoBehaviour{
 
 	void Update() {
 		isInSpaceUpdate ();
-		if (active) {
+		if (active && !driver.gamePaused ()) {
 			speedUpdate ();
 
 			if (Input.GetKey (KeyCode.W)) {
