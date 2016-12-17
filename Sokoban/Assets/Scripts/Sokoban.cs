@@ -16,6 +16,7 @@ public class Sokoban {
 	private Player player;
 	private Vector3 positionCenter;
 	private Vector3 position;
+	private Driver driver;
 
 	/*Startsituation der Hauptkamera*/
 	public Vector3 mainCamStartPosition;
@@ -28,11 +29,12 @@ public class Sokoban {
 	 * @param position des Sokobans in der Welt
 	 * @param path der Sokoban-Textdatei. 
 	 */
-	public Sokoban (Vector3 position, string path, bool createPlayer) {
+	public Sokoban (Vector3 position, string path, bool createPlayer, Driver driver) {
 		this.position = position;
 		LevelParser lp = new LevelParser(path, position);
 		this.board = lp.parse ();
 		readPositionCenterInWorld ();
+		this.driver = driver;
 	}
 
 	private void destroyPlayer() {
@@ -54,7 +56,7 @@ public class Sokoban {
 	 * dementsprechend bewegt.
 	 */
 	public void sokobanListener() {
-		if (!board.gameIsOver ()) {
+		if (!board.gameIsOver () && !driver.gamePaused()) {
 			if (Input.GetKeyDown (KeyCode.RightArrow)) {
 				player.move ("right");
 			}
@@ -70,7 +72,7 @@ public class Sokoban {
 			if (Input.GetKeyDown (KeyCode.DownArrow)) {
 				player.move ("down");
 			}
-		} else {
+		} else if (!driver.gamePaused()) {
 			Debug.Log ("Game is Over! You won!");
 		}
 	}

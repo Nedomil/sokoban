@@ -15,28 +15,28 @@ public class ButtonManager : MonoBehaviour {
 	public LeaveButton leaveButton;
 	public RestartButton restartButton;
 	public LandButton landButton;
+	private LeaveButton sLeaveButton;
+	private RestartButton sRestartButton;
+	private LandButton sLandButton;
 	public Driver driver;
 
 	private bool mainMenuOn;
 
 	void Start() {
+		Assert.IsNotNull (landButton);
+		Assert.IsNotNull (restartButton);
+		Assert.IsNotNull (leaveButton);
+		sLeaveButton = leaveButton.GetComponent<LeaveButton>();
+		sRestartButton = restartButton.GetComponent<RestartButton>();
+		sLandButton = landButton.GetComponent<LandButton>();
+		mainMenuOn = false;
 	}
 
 	void Update() {
-		showOrHideLandButton ();
-
-		if (Input.GetKey (KeyCode.Escape)) {
+		sLandButton.showOrHide ();
+		if (Input.GetKeyDown (KeyCode.Escape)) {
 			showOrHideMainMenu ();
 		}
-	}
-
-	/**
-	 * Berechnet die Länge des gegebenen Vektors.
-	 * @param Vektor, dessen Länge berechnet werden soll.
-	 * @return länge des Vektors.
-	 */
-	public float vectorLength(Vector3 v) {
-		return (float)System.Math.Sqrt (System.Math.Pow (v.x, 2) + System.Math.Pow (v.y, 2) + System.Math.Pow (v.z, 2));
 	}
 
 	public void hideSokobanButtons() {
@@ -44,39 +44,14 @@ public class ButtonManager : MonoBehaviour {
 		restartButton.hideObject ();
 	}
 
-	public void showSokobanButtons() {
-		leaveButton.showObject ();
-		restartButton.showObject ();
-	}
-
-	private void showOrHideLandButton() {
-		Player player = driver.getPlayer ();
-		ArrayList sokobans = driver.getSokobans ();
-		bool showLandButton = false;
-		foreach (Sokoban sokoban in sokobans) {
-			Vector3 distanceToSokobanV = player.getGameObject ().transform.position - sokoban.getPositionCenterSokoban ();
-			float distanceToSokoban = vectorLength (distanceToSokobanV);
-			if (distanceToSokoban < 1 && driver.isInSpace ()) {
-				showLandButton = true;
-				driver.setActiveSokoban (sokoban);
-			}
-			if (showLandButton)			
-				landButton.showObject ();
-			else
-				landButton.hideObject ();
-		}
+	public void showSokobanButtons(string reason) {
+		leaveButton.showObject (reason);
+		restartButton.showObject (reason);
 	}
 
 	private void showOrHideMainMenu() {
 		changeMainMenuOn ();
 		showOrHideGUI ();
-	}
-
-	private void showOrHideGUI() {
-		if (mainMenuOn)
-			hideAllButtons ();
-		else
-			showAllButtons();
 	}
 
 	private void changeMainMenuOn() {
@@ -89,13 +64,20 @@ public class ButtonManager : MonoBehaviour {
 		Assert.IsTrue (mainMenuOn != temp);
 	}
 
-	private void showAllButtons() {
-		showSokobanButtons ();
-		showOrHideLandButton ();
+	private void showOrHideGUI() {
+		if (mainMenuOn)
+			mainMenuAsUpperMenu (true);
+		else
+			mainMenuAsUpperMenu(false);
 	}
 
-	private void hideAllButtons() {
-		hideSokobanButtons ();
-		landButton.hideObject ();
+	private void mainMenuAsUpperMenu(bool boolean) {
+		sLandButton.setUpperMenuActive (boolean);
+		sLeaveButton.setUpperMenuActive (boolean);
+		sRestartButton.setUpperMenuActive (boolean);
+	}
+
+	public bool getMainMenuOn() {
+		return mainMenuOn;
 	}
 }

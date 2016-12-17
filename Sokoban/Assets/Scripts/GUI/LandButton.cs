@@ -19,12 +19,17 @@ public class LandButton : MonoBehaviour, IGUIHide {
 	 * nur einmal ausgeführt wird.
 	 */
 	private int counter;
+	bool upperMenuActive;
+	bool hadUpperMenuAndWasActive;
+	bool active;
 
 	/**
 	 * Counter wird auf 0 gesetzt und der Button versteckt.
 	 */
 	void Start () {
 		counter = 0;
+		hadUpperMenuAndWasActive = false;
+		active = false;
 		hideObject ();
 	}
 
@@ -41,6 +46,34 @@ public class LandButton : MonoBehaviour, IGUIHide {
 		}
 	}
 
+	public void showOrHide() {
+		if (!upperMenuActive) {
+			Player player = driver.getPlayer ();
+			ArrayList sokobans = driver.getSokobans ();
+			bool showLandButton = false;
+			foreach (Sokoban sokoban in sokobans) {
+				Vector3 distanceToSokobanV = player.getGameObject ().transform.position - sokoban.getPositionCenterSokoban ();
+				float distanceToSokoban = vectorLength (distanceToSokobanV);
+				if (distanceToSokoban < 1 && driver.isInSpace ()) {
+					showLandButton = true;
+					driver.setActiveSokoban (sokoban);
+				}
+				if (showLandButton)
+					showObject ("default");
+				else
+					hideObject ();
+			}
+		}
+	}
+
+	public void setUpperMenuActive(bool upperMenuActive) {
+		this.upperMenuActive = upperMenuActive;
+		if (upperMenuActive)
+			hideObject ();
+		else
+			showObject ("upperMenu");
+	}
+
 	private void land() {
 		Sokoban sokoban = driver.getActiveSokoban ();
 		driver.setInSpace (false);
@@ -49,7 +82,7 @@ public class LandButton : MonoBehaviour, IGUIHide {
 		sokoban.getBoard ().restoreStartSituation ();
 		sokoban.getPlayer ().goToStartTransform ();
 		setPlayersSpeedZero ();
-		buttonManager.showSokobanButtons ();
+		buttonManager.showSokobanButtons ("land");
 		hideObject ();
 	}
 
@@ -58,10 +91,24 @@ public class LandButton : MonoBehaviour, IGUIHide {
 	}
 
 	public void hideObject() {
+		hadUpperMenuAndWasActive = upperMenuActive && active;
+		active = false;
 		button.gameObject.SetActive(false);
 	}
 
-	public void showObject() {
-		button.gameObject.SetActive(true);
+	public void showObject(string reason) {
+		if (hadUpperMenuAndWasActive || reason.Equals("default")) {
+			button.gameObject.SetActive (true);
+			active = true;
+		}
+	}
+
+	/**
+	 * Berechnet die Länge des gegebenen Vektors.
+	 * @param Vektor, dessen Länge berechnet werden soll.
+	 * @return länge des Vektors.
+	 */
+	public float vectorLength(Vector3 v) {
+		return (float)System.Math.Sqrt (System.Math.Pow (v.x, 2) + System.Math.Pow (v.y, 2) + System.Math.Pow (v.z, 2));
 	}
 }

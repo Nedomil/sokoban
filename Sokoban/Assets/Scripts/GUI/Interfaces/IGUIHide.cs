@@ -13,5 +13,5 @@ public interface IGUIHide {
 	/**
 	 * Zeigt das Objekt an.
 	 */
-	void showObject ();
+	void showObject (string reason);
 }

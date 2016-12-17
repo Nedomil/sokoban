@@ -16,9 +16,14 @@ public class LeaveButton : MonoBehaviour, IGUIHide {
 	public Driver driver;
 	public Camera mainCam;
 	private int counter;
+	bool upperMenuActive;
+	bool hadUpperMenuAndWasActive;
+	bool active;
 
 	void Start () {
 		counter = 0;
+		hadUpperMenuAndWasActive = false;
+		active = true;
 	}
 
 	void Update () {
@@ -28,6 +33,14 @@ public class LeaveButton : MonoBehaviour, IGUIHide {
 			button.onClick.AddListener (delegate { leave (); });
 			counter = 10000;
 		}
+	}
+
+	public void setUpperMenuActive(bool upperMenuActive) {
+		this.upperMenuActive = upperMenuActive;
+		if (upperMenuActive)
+			hideObject ();
+		else
+			showObject ("upperMenu");
 	}
 
 	private void leave() {
@@ -47,10 +60,15 @@ public class LeaveButton : MonoBehaviour, IGUIHide {
 	}
 
 	public void hideObject() {
+		hadUpperMenuAndWasActive = upperMenuActive && active;
+		active = false;
 		button.gameObject.SetActive(false);
 	}
 
-	public void showObject() {
-		button.gameObject.SetActive(true);
+	public void showObject(string reason) {
+		if (hadUpperMenuAndWasActive || reason.Equals("land")) {
+			button.gameObject.SetActive (true);
+			active = true;
+		}
 	}
 }
