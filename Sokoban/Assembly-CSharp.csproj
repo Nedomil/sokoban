@@ -71,14 +71,14 @@
      <Compile Include="Assets\Scripts\Squares\Player.cs" />
      <Compile Include="Assets\Scripts\Squares\SquareFactory.cs" />
      <Compile Include="Assets\Scripts\Squares\Wall.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\ExitButton.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\MainCamera.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\StartButton.cs" />
      <Compile Include="Assets\Scripts\Tests\LevelParserTest.cs" />
      <Compile Include="Assets\Scripts\Tests\PlayerTest.cs" />
      <Compile Include="Assets\Scripts\Tests\TestSuit.cs" />
      <None Include="Assets\Resources\Levels\level2.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -93,9 +93,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
