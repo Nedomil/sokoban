@@ -10,6 +10,7 @@ using System.Collections;
  * - Kennt Spieler, Board, die eigene Position im All
  * - Weiss, wo die Kamera stehen muss, damit das Spielfeld gänzlich angezeigt wird.
  * - Befielt dem Spieler sich zu bewegen.
+ * - Weiss, ob das Sokoban bereits gelöst wurde und kann es signalisieren.
  */
 public class Sokoban {
 	private Board board;
@@ -17,6 +18,9 @@ public class Sokoban {
 	private Vector3 positionCenter;
 	private Vector3 position;
 	private Driver driver;
+
+	//true falls das Spiel gelöst wurde.
+	private bool solved;
 
 	/*Startsituation der Hauptkamera*/
 	public Vector3 mainCamStartPosition;
@@ -35,6 +39,7 @@ public class Sokoban {
 		this.board = lp.parse ();
 		readPositionCenterInWorld ();
 		this.driver = driver;
+		this.solved = false;
 	}
 
 	private void destroyPlayer() {
@@ -73,6 +78,7 @@ public class Sokoban {
 				player.move ("down");
 			}
 		} else if (!driver.gamePaused()) {
+			solved = true;
 			Debug.Log ("Game is Over! You won!");
 		}
 	}
@@ -103,5 +109,13 @@ public class Sokoban {
 
 	public void setMainCamStartForward(Vector3 v) {
 		mainCamStartForward = v;
+	}
+
+	public void setSolved(bool solved) {
+		this.solved = solved;
+	}
+
+	public bool getSolved() {
+		return solved;
 	}
 }
