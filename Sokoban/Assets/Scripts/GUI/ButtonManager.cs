@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 using System.Collections;
 
 /**
@@ -15,6 +16,9 @@ public class ButtonManager : MonoBehaviour {
 	public LeaveButton leaveButton;
 	public RestartButton restartButton;
 	public LandButton landButton;
+	public Button MPlayButton;
+	public Button MSaveButton;
+	public Button MExitButton;
 	private LeaveButton sLeaveButton;
 	private RestartButton sRestartButton;
 	private LandButton sLandButton;
@@ -30,6 +34,7 @@ public class ButtonManager : MonoBehaviour {
 		sRestartButton = restartButton.GetComponent<RestartButton>();
 		sLandButton = landButton.GetComponent<LandButton>();
 		mainMenuOn = false;
+		showAllMainMenuElements (false);
 	}
 
 	void Update() {
@@ -37,6 +42,12 @@ public class ButtonManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			showOrHideMainMenu ();
 		}
+	}
+
+	private void showAllMainMenuElements(bool boolean) {
+		MPlayButton.gameObject.SetActive (boolean);
+		MSaveButton.gameObject.SetActive (boolean);
+		MExitButton.gameObject.SetActive (boolean);
 	}
 
 	public void hideSokobanButtons() {
@@ -49,17 +60,20 @@ public class ButtonManager : MonoBehaviour {
 		restartButton.showObject (reason);
 	}
 
-	private void showOrHideMainMenu() {
+	public void showOrHideMainMenu() {
 		changeMainMenuOn ();
 		showOrHideGUI ();
 	}
 
 	private void changeMainMenuOn() {
 		bool temp = mainMenuOn;
-		if (mainMenuOn)
+		if (mainMenuOn) {
 			mainMenuOn = false;
-		else
+			showAllMainMenuElements (false);
+		} else {
 			mainMenuOn = true;
+			showAllMainMenuElements (true);
+		}
 
 		Assert.IsTrue (mainMenuOn != temp);
 	}

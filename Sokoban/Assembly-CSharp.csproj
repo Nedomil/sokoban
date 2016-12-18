@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\GUI\Interfaces\IGUIHide.cs" />
      <Compile Include="Assets\Scripts\GUI\LandButton.cs" />
      <Compile Include="Assets\Scripts\GUI\LeaveButton.cs" />
+     <Compile Include="Assets\Scripts\GUI\MainMenu\ExitGame.cs" />
      <Compile Include="Assets\Scripts\GUI\RestartButton.cs" />
      <Compile Include="Assets\Scripts\Interfaces\IRestart.cs" />
      <Compile Include="Assets\Scripts\LevelParser.cs" />
