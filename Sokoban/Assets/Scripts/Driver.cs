@@ -9,6 +9,7 @@ using System.Collections;
  * - Konstrueirt Spieler
  * - Leitet die Wichtigen Objekte weiter (Board, Player usw.)
  */
+[System.Serializable]
 public class Driver : MonoBehaviour {
 	private ArrayList sokobans;
 	private Player player;
@@ -43,6 +44,12 @@ public class Driver : MonoBehaviour {
 		sokoban.setMainCamStartPosition(camPosition);
 		sokoban.setMainCamStartForward(camForward);
 		sokobans.Add (sokoban);
+	}
+
+	public void setAllSokobansTrue() {
+		foreach (Sokoban sok in sokobans) {
+			sok.setSolved (true);
+		}
 	}
 
 	public bool gamePaused() {

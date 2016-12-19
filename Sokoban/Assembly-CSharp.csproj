@@ -58,8 +58,10 @@
      <Compile Include="Assets\Scripts\GUI\LeaveButton.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\ExitGame.cs" />
      <Compile Include="Assets\Scripts\GUI\RestartButton.cs" />
+     <Compile Include="Assets\Scripts\GUI\SaveButton.cs" />
      <Compile Include="Assets\Scripts\Interfaces\IRestart.cs" />
      <Compile Include="Assets\Scripts\LevelParser.cs" />
+     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
      <Compile Include="Assets\Scripts\Sokoban.cs" />
      <Compile Include="Assets\Scripts\SpaceObjects\SpacePlayer.cs" />
      <Compile Include="Assets\Scripts\SpaceObjects\SpeedCooldownTimer.cs" />
@@ -72,9 +74,10 @@
      <Compile Include="Assets\Scripts\Squares\Player.cs" />
      <Compile Include="Assets\Scripts\Squares\SquareFactory.cs" />
      <Compile Include="Assets\Scripts\Squares\Wall.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\ContinueButton.cs" />
      <Compile Include="Assets\Scripts\StartMenu\ExitButton.cs" />
      <Compile Include="Assets\Scripts\StartMenu\MainCamera.cs" />
-     <Compile Include="Assets\Scripts\StartMenu\StartButton.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\NewGameButton.cs" />
      <Compile Include="Assets\Scripts\Tests\LevelParserTest.cs" />
      <Compile Include="Assets\Scripts\Tests\PlayerTest.cs" />
      <Compile Include="Assets\Scripts\Tests\TestSuit.cs" />
