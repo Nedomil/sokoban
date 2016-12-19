@@ -78,6 +78,7 @@
      <Compile Include="Assets\Scripts\Tests\LevelParserTest.cs" />
      <Compile Include="Assets\Scripts\Tests\PlayerTest.cs" />
      <Compile Include="Assets\Scripts\Tests\TestSuit.cs" />
+     <Compile Include="Assets\Scripts\Trophy.cs" />
      <None Include="Assets\Resources\Levels\level2.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
  <Reference Include="UnityEngine.UI">

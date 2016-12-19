@@ -21,6 +21,7 @@ public class Sokoban {
 
 	//true falls das Spiel gelöst wurde.
 	private bool solved;
+	private Trophy trophy;
 
 	/*Startsituation der Hauptkamera*/
 	public Vector3 mainCamStartPosition;
@@ -40,6 +41,7 @@ public class Sokoban {
 		readPositionCenterInWorld ();
 		this.driver = driver;
 		this.solved = false;
+		trophy = new Trophy (board, solved);
 	}
 
 	private void destroyPlayer() {
@@ -79,6 +81,7 @@ public class Sokoban {
 			}
 		} else if (!driver.gamePaused()) {
 			solved = true;
+			trophy.setSolved (true);
 			Debug.Log ("Game is Over! You won!");
 		}
 	}

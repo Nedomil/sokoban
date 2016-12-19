@@ -10,6 +10,7 @@ public class Board : IRestart {
     private ArrayList breakableWalls;
     private ArrayList breakableFloors;
 	private int startPositionPlayerX, startPositionPlayerY;
+	private Trophy trophy;
 
 	public Board() {
 	}
