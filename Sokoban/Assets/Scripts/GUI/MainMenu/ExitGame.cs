@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExitGame : MonoBehaviour {
 
 	private bool COOLDOWN = false;
-	private int TIMER = 60;
+	private int TIMER = 100;
 
 	private bool cooldown;
 	private int timer; 
